@@ -1,24 +1,154 @@
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+let intialDiceSet = [
+    {id: 0, value: 20, amount: 0},
+    {id: 1, value: 12, amount: 0},
+    {id: 2, value: 10, amount: 0},
+    {id: 3, value: 8, amount: 0},
+    {id: 4, value: 6, amount: 0},
+    {id: 5, value: 4, amount: 0},
+  ];
+
 function App() {
+  // Name the roll
+  const [name, setName] = useState('');
+  // What type of roll is it? Damage, attack, life saving?
+  const [rollType, setRollType] = useState('');
+  // How many of each dice are needed
+  // Order is d20, d12, d10, d8, d6, then d4
+  const [dice, setDice] = useState(intialDiceSet); // Going to keep an array of all the different dice used
+  // Keep track of the modifiers so we know what to add or subtract
+  const [modifier, setModifer] = useState('');
+
+  // The function that updates the name
+  const handleTextChange = (event) => {
+    setName(event.target.value);
+  };
+
+  // The function that updates modifier
+  const handleModifierChange = (event) => {
+    setModifer(event.target.value);
+  };
+
+  // The function that updates the current type
+  const handleSelectionChange = (event) => {
+    setRollType(event.target.value);
+  };
+
+  // Add dice to the specfic index
+  function addDice(diceID){
+    const newDiceSet = dice.map(die => {
+      if(die.id === diceID){
+        return {
+          ...die,
+          amount: die.amount + 1,
+        }
+      }
+      else{
+        return die;
+      };
+    }); 
+    setDice(newDiceSet);   
+}
+
+  // Remove a die fomr the specific index. 
+  const subtractDice = (diceID) => {
+    const newDiceSet = dice.map(die => {
+      if(die.id === diceID){
+        if(die.amount > 0){
+          return {
+            ...die,
+            amount: die.amount - 1,
+          }
+        }
+        else{
+          return die;
+        }
+      }
+      else{
+        return die;
+      };
+    }); 
+    setDice(newDiceSet);  
+  };
+
+  // The function that is submiting the data to wills server
+  const handleSubmit = (event) => {
+    event.preventDefault(); // Make sure they filled in the form
+    
+    const formData = { name, rollType, dice, modifier}; // The data I want to send to will's server
+
+    // Make a post request to wills server and send the data
+    console.log(JSON.stringify(formData));
+    // Ask if the user wants to submit another form, and say thank you
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <form onSubmit={handleSubmit} className="App">
+      {/* This is the header for the page */}
+      <h1>
+      Jon and Wills DND form
+      </h1>
+
+      {/* This is the input for the name of the roll */}
+      <p>
+      <label htmlFor='myName'>Enter Name: </label>
+      <input 
+      type="text"
+      id="myName"
+      value={name}
+      onChange={handleTextChange}
+      placeholder='Type Name Here'
+      />
+      </p>
+
+      {/* This is the dropdown box to select the type of roll */}
+      <p>
+        <label htmlFor='rollType'>Roll Type: </label>
+        <select value={rollType} onChange={handleSelectionChange}> 
+          <option value="">Select a Roll Type</option>
+          <option valu="attack_check">Attack Check Roll</option>
+          <option valu="attack_damage">Attack Damage Roll</option>
+          <option valu="ability">Ability check</option>
+          <option valu="saving">Saving Throw</option>
+        </select>
+      </p>
+    
+      {/* This is the dropdown box to select the type of roll */}
+      <div>
+        {/* Need to make a component that displays the dice, have value, and has a button that increases the count */}
+        
+        {dice.map(d => (
+          <div key={d.id}>
+          Value: {d.value},&nbsp; Amount: {d.amount}
+          &nbsp;&nbsp;&nbsp;
+          <button type='button' onClick={() => addDice(d.id)} >Add</button>
+          &nbsp;&nbsp;&nbsp;
+          <button type='button' onClick={() => subtractDice(d.id)} >Subtract</button>
+        </div>
+))}
+      </div>
+
+      {/* Allow the user to add modifiers */}
+      <p>
+      <label htmlFor='modifier'>Enter Modifer: </label>
+      <input 
+      type="text"
+      id="myModifier"
+      value={modifier}
+      onChange={handleModifierChange}
+      placeholder='Type Modifier Here'
+      />
+      </p>
+
+      {/* Submit button that will send the information to will's server */}
+      <p>
+        <button type='submit'>Submit</button>
+      </p>
+
+    </form>
   );
 }
 
