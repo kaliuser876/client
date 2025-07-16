@@ -1,0 +1,30 @@
+.dice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #ccc; /* optional: box around each dice */
+  border-radius: 8px;
+  padding: 1rem;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dice-text {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.dice-image {
+  width: 100px;
+  height: auto;
+  margin-bottom: 0.5rem;
+  image-rendering: pixelated;
+}
+
+.dice-buttons button {
+  margin: 0 0.25rem;
+  padding: 0.4rem 0.8rem;
+  font-size: 1rem;
+}

@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
+import Dice from './Dice';
 import './App.css';
 
 let intialDiceSet = [
-    {id: 0, value: 20, amount: 0},
-    {id: 1, value: 12, amount: 0},
-    {id: 2, value: 10, amount: 0},
-    {id: 3, value: 8, amount: 0},
-    {id: 4, value: 6, amount: 0},
-    {id: 5, value: 4, amount: 0},
+  {id: 0, value: 4, amount: 0},
+  {id: 1, value: 6, amount: 0},
+  {id: 2, value: 8, amount: 0},
+  {id: 3, value: 10, amount: 0},
+  {id: 4, value: 12, amount: 0},
+  {id: 5, value: 20, amount: 0},
   ];
 
 function App() {
@@ -86,7 +87,9 @@ function App() {
   }
 
   return (
+    
     <form onSubmit={handleSubmit} className="App">
+      
       {/* This is the header for the page */}
       <h1>
       Jon and Wills DND form
@@ -117,18 +120,11 @@ function App() {
       </p>
     
       {/* This is the dropdown box to select the type of roll */}
-      <div>
+      <div className="dice-row">
         {/* Need to make a component that displays the dice, have value, and has a button that increases the count */}
-        
         {dice.map(d => (
-          <div key={d.id}>
-          Value: {d.value},&nbsp; Amount: {d.amount}
-          &nbsp;&nbsp;&nbsp;
-          <button type='button' onClick={() => addDice(d.id)} >Add</button>
-          &nbsp;&nbsp;&nbsp;
-          <button type='button' onClick={() => subtractDice(d.id)} >Subtract</button>
-        </div>
-))}
+          <Dice id={d.id} onAdd={() => addDice(d.id)} onSubtract={() => subtractDice(d.id)} value={d.value} amount={d.amount}></Dice>
+        ))}
       </div>
 
       {/* Allow the user to add modifiers */}
@@ -147,7 +143,6 @@ function App() {
       <p>
         <button type='submit'>Submit</button>
       </p>
-
     </form>
   );
 }
