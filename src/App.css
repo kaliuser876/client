@@ -2,6 +2,7 @@
   max-width: 500px;
   margin: 0 auto;
   padding: 1rem;
+  background-color:#61dafb;
 }
 
 * {
@@ -11,6 +12,8 @@
 }
 
 html, body, #root {
+  margin: 0;
+  padding: 0;
   height: 100%;
   width: 100%;
 }
@@ -40,6 +43,15 @@ button {
 .App {
   text-align: center;
 }
+.background {
+  background-color: burlywood;
+  min-height: 100vh; /* ensures it fills the full screen height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem; /* optional, gives some breathing room */
+  box-sizing: border-box;
+}
 
 .App-logo {
   height: 40vmin;
@@ -52,16 +64,6 @@ button {
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
 .App-link {
   color: #61dafb;

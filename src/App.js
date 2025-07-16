@@ -98,7 +98,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div className='background'>
     {!submited && <form onSubmit={handleSubmit} className="App">
       {/* This is the header for the page */}
       <h1>
@@ -106,7 +106,7 @@ function App() {
       </h1>
 
       {/* This is the input for the name of the roll */}
-      <p>
+      <div>
       <label htmlFor='myName'>Enter Name: </label>
       <input 
       type="text"
@@ -115,10 +115,10 @@ function App() {
       onChange={handleTextChange}
       placeholder='Type Name Here'
       />
-      </p>
+      </div>
 
       {/* This is the dropdown box to select the type of roll */}
-      <p>
+      <div>
         <label htmlFor='rollType'>Roll Type: </label>
         <select value={rollType} onChange={handleSelectionChange}> 
           <option value="">Select a Roll Type</option>
@@ -127,7 +127,7 @@ function App() {
           <option value="ability">Ability check</option>
           <option value="saving">Saving Throw</option>
         </select>
-      </p>
+      </div>
     
       {/* This is the dropdown box to select the type of roll */}
       <div className="dice-row">
@@ -138,7 +138,7 @@ function App() {
       </div>
 
       {/* Allow the user to add modifiers */}
-      <p>
+      <div>
       <label htmlFor='modifier'>Enter Modifer: </label>
       <input 
       type="text"
@@ -147,12 +147,12 @@ function App() {
       onChange={handleModifierChange}
       placeholder='Type Modifier Here'
       />
-      </p>
+      </div>
 
       {/* Submit button that will send the information to will's server */}
-      <p>
+      <div>
         <button type='submit'>Submit</button>
-      </p>
+      </div>
     </form>
       }
       {submited && 
