@@ -112,10 +112,10 @@ function App() {
         <label htmlFor='rollType'>Roll Type: </label>
         <select value={rollType} onChange={handleSelectionChange}> 
           <option value="">Select a Roll Type</option>
-          <option valu="attack_check">Attack Check Roll</option>
-          <option valu="attack_damage">Attack Damage Roll</option>
-          <option valu="ability">Ability check</option>
-          <option valu="saving">Saving Throw</option>
+          <option value="attack_check">Attack Check Roll</option>
+          <option value="attack_damage">Attack Damage Roll</option>
+          <option value="ability">Ability check</option>
+          <option value="saving">Saving Throw</option>
         </select>
       </p>
     

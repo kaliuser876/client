@@ -1,3 +1,9 @@
+.App form {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -7,6 +13,28 @@
 html, body, #root {
   height: 100%;
   width: 100%;
+}
+
+input[type="text"],
+select,
+button {
+  font-size: 1.2rem;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 100%; /* full width on small screens */
+  max-width: 400px;
+  box-sizing: border-box;
+  margin: 0.5rem 0;
+}
+
+@media (min-width: 481px) {
+  input[type="text"],
+  select,
+  button {
+    width: auto;
+    max-width: none;
+  }
 }
 
 .App {
@@ -53,8 +81,8 @@ html, body, #root {
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  flex-wrap: wrap; /* allow wrapping */
   margin: 0;
   padding: 0;
-  height: auto; /* or 100vh if you want full height */
   width: 100%;
 }
