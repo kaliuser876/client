@@ -156,7 +156,7 @@ function App() {
     </form>
       }
       {submited && 
-      <div>
+      <div className='App'>
         <h1>Thank you for entering the roll. Please wait while we calculate your roll.</h1>
         <button onClick={handleReset}>Another Roll</button>
         </div>}
