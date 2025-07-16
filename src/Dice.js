@@ -39,8 +39,8 @@ function Dice(props){
             </div>
                 <img src={useImage} alt="Dice Image" className="dice-image"/>
             <div className="dice-buttons">
-                <button onClick={props.onAdd}>+</button>
-                <button onClick={props.onSubtract}>-</button>
+                <button type="button" onClick={props.onAdd}>+</button>
+                <button type="button" onClick={props.onSubtract}>-</button>
             </div>
         </div>
 

@@ -14,6 +14,8 @@ let intialDiceSet = [
 
 function App() {
   // Name the roll
+  const [submited, setSubmit] = useState(false);
+  const [formData, setFormData] = useState();
   const [name, setName] = useState('');
   // What type of roll is it? Damage, attack, life saving?
   const [rollType, setRollType] = useState('');
@@ -23,6 +25,14 @@ function App() {
   // Keep track of the modifiers so we know what to add or subtract
   const [modifier, setModifer] = useState('');
 
+  // The function that resets the form
+  const handleReset = (event) => {
+    setName('');
+    setRollType('');
+    setDice(intialDiceSet);
+    setModifer('');
+    setSubmit(false);
+  };
   // The function that updates the name
   const handleTextChange = (event) => {
     setName(event.target.value);
@@ -79,17 +89,17 @@ function App() {
   const handleSubmit = (event) => {
     event.preventDefault(); // Make sure they filled in the form
     
-    const formData = { name, rollType, dice, modifier}; // The data I want to send to will's server
+    setFormData({ name, rollType, dice, modifier}); // The data I want to send to will's server
 
     // Make a post request to wills server and send the data
     console.log(JSON.stringify(formData));
+    setSubmit(true);
     // Ask if the user wants to submit another form, and say thank you
   }
 
   return (
-    
-    <form onSubmit={handleSubmit} className="App">
-      
+    <div>
+    {!submited && <form onSubmit={handleSubmit} className="App">
       {/* This is the header for the page */}
       <h1>
       Jon and Wills DND form
@@ -144,6 +154,13 @@ function App() {
         <button type='submit'>Submit</button>
       </p>
     </form>
+      }
+      {submited && 
+      <div>
+        <h1>Thank you for entering the roll. Please wait while we calculate your roll.</h1>
+        <button onClick={handleReset}>Another Roll</button>
+        </div>}
+      </div>
   );
 }
 
